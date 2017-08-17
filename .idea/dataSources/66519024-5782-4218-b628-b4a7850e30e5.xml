@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="demo@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.3">
+    <root id="1"/>
+    <schema id="2" parent="1" name="demo">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="test"/>
+    <table id="6" parent="2" name="sessionid"/>
+    <table id="7" parent="2" name="user">
+      <Comment>用户账号信息表</Comment>
+    </table>
+    <column id="8" parent="6" name="id">
+      <Position>1</Position>
+      <Comment>数据库ID</Comment>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="9" parent="6" name="sessionid">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="10" parent="6" name="phonenumber">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="11" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="12" parent="7" name="id">
+      <Position>1</Position>
+      <Comment>数据库ID</Comment>
+      <DataType>bigint(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="13" parent="7" name="phonenumber">
+      <Position>2</Position>
+      <Comment>手机号</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="7" name="nickname">
+      <Position>3</Position>
+      <Comment>昵称</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="7" name="password">
+      <Position>4</Position>
+      <Comment>密码</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="7" name="canlogin">
+      <Position>5</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>b&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="17" parent="7" name="failtime">
+      <Position>6</Position>
+      <Comment>登录失败的时间</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="18" parent="7" name="failcount">
+      <Position>7</Position>
+      <Comment>累计登录失败的次数</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="19" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,5 +1,6 @@
 package com.demo.ctrl;
 
+import com.alibaba.fastjson.JSON;
 import com.demo.common.CommonInfo;
 import com.demo.common.CommonUtil;
 import lombok.extern.log4j.Log4j;
@@ -71,8 +72,12 @@ public class CommonCtrl
     @RequestMapping("/changenickname")
     public CommonInfo changenickname(String newNickname, String sessionID, HttpSession httpSession)
     {
-        if(sessionID==null) return new CommonInfo(10001);
+        log.debug(sessionID);
+        log.debug(JSON.toJSONString(httpSession.getAttributeNames()));
+        if (sessionID == null) return new CommonInfo(10001);
+
         String sessionid = (String) httpSession.getAttribute(CommonUtil.sessionid);
+        log.debug(sessionid);
         if (!sessionID.equals(sessionid)) return new CommonInfo(10001);
 
         String phonenumber = commonServ.findPhoneNumber(sessionid);

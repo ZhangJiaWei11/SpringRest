@@ -77,7 +77,6 @@ public class CommonCtrl
 
         String phonenumber = commonServ.findPhoneNumber(sessionid);
 
-
         return commonServ.changeNickname(newNickname, phonenumber);
     }
 }

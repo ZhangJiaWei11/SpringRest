@@ -62,7 +62,6 @@ public class CommonCtrl
         return commonServ.login(phonenumber, password, httpSession);
     }
 
-
     /**
      * 用户修改昵称
      *

@@ -59,7 +59,7 @@ public class CommonCtrl
         CommonInfo ret = commonServ.checkLoginInfo(phonenumber, password);
         if (ret != null) return ret;
 
-        return commonServ.login(phonenumber, password, httpSession);
+        return commonServ.login(phonenumber, password);
     }
 
     /**
@@ -69,11 +69,11 @@ public class CommonCtrl
      * @param newNickname 新的昵称
      */
     @RequestMapping("/changenickname")
-    public CommonInfo changenickname(String newNickname, String sessionID, HttpSession httpSession)
+    public CommonInfo changenickname(String newNickname, String sessionID)
     {
         if (sessionID == null) return new CommonInfo(10001);
 
-        String phonenumber = commonServ.findPhoneNumber(sessionID);
+        String phonenumber = commonServ.findPhoneNumberBySessionid(sessionID);
         return commonServ.changeNickname(newNickname, phonenumber);
     }
 }

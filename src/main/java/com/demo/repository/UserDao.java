@@ -94,13 +94,9 @@ public class UserDao
         if(phonenumberCount==0) return false;
 
         Boolean ret = jdbcTemplate.queryForObject("SELECT canlogin FROM user WHERE phonenumber=?", Boolean.class, phonenumber);
-        log.debug("-----------------------------------------");
-        log.debug(ret);
-        log.debug("-----------------------------------------");
         if (ret) return true;
 
         List<Long> failtimesList = findFailtimes(phonenumber);
-
         return failtimesList.get(failtimesList.size() - 1) < DateTime.now().minusMinutes(10).getMillis();
     }
 

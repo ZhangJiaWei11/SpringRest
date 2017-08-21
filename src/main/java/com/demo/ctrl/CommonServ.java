@@ -1,7 +1,6 @@
 package com.demo.ctrl;
 
 import com.demo.common.CommonInfo;
-import com.demo.common.CommonUtil;
 import com.demo.repository.SessionIdDao;
 import com.demo.repository.UserDao;
 import org.joda.time.DateTime;
@@ -71,7 +70,7 @@ public class CommonServ
     CommonInfo checkRegisteInfo(String phoneNumber, String password, String passRepeat, String securityCode, String nickName, HttpSession httpSession)
     {
         //验证：手机号的合法性
-        if (phoneNumber==null) return new CommonInfo(10010);
+        if (phoneNumber == null) return new CommonInfo(10010);
         boolean phoneIsOk = phonePattern.matcher(phoneNumber).matches();
         if (!phoneIsOk) return new CommonInfo(10010);
 
@@ -117,7 +116,7 @@ public class CommonServ
     CommonInfo checkLoginInfo(String phonenumber, String password)
     {
         //验证：账号合法
-        if (phonenumber==null) return new CommonInfo(11020);
+        if (phonenumber == null) return new CommonInfo(11020);
         if (!phonePattern.matcher(phonenumber).matches()) return new CommonInfo(11020);
 
         //验证：密码合法
@@ -172,7 +171,7 @@ public class CommonServ
     /**
      * 用户登录 业务逻辑
      */
-    CommonInfo login(String phonenumber, String password, HttpSession httpSession)
+    CommonInfo login(String phonenumber, String password)
     {
         //验证：是否可以登录
         Boolean canlogin = userDao.canLogin(phonenumber);
@@ -184,7 +183,6 @@ public class CommonServ
         {
             CommonInfo ret = new CommonInfo(10000);
             String sessionId = getSessionID(phonenumber);
-            httpSession.setAttribute(CommonUtil.sessionid, sessionId);
             ret.setData(sessionId);
             sessionIdDao.addSession(sessionId, phonenumber);
             return ret;
@@ -203,13 +201,13 @@ public class CommonServ
      */
     private String getSessionID(String phonenumber)
     {
-        return phonenumber +"-"+ DateTime.now().getMillis() +"-"+ Math.random();
+        return phonenumber + "-" + DateTime.now().getMillis() + "-" + Math.random();
     }
 
     /**
      * 根据sessionid 获取 phonenumber
      */
-    String findPhoneNumber(String sessionid)
+    String findPhoneNumberBySessionid(String sessionid)
     {
         return sessionIdDao.findPhoneNumberBySessionid(sessionid);
     }

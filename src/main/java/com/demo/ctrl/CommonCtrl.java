@@ -32,13 +32,12 @@ public class CommonCtrl
      * @param password     密码
      * @param passrepeat   密码重复
      * @param nickname     昵称
-     * @param securitycode 验证码
      */
     @RequestMapping("/registe")
     public CommonInfo registe(String phonenumber, String password, String passrepeat,
-                              String nickname, String securitycode, HttpSession httpSession)
+                              String nickname, HttpSession httpSession)
     {
-        CommonInfo ret = commonServ.checkRegisteInfo(phonenumber, password, passrepeat, securitycode, nickname, httpSession);
+        CommonInfo ret = commonServ.checkRegisteInfo(phonenumber, password, passrepeat, nickname);
         if (ret != null) return ret;
 
         //移除 session 中的验证码
@@ -54,7 +53,7 @@ public class CommonCtrl
      * @param phonenumber 手机号
      */
     @RequestMapping("/login")
-    public CommonInfo login(String phonenumber, String password, HttpSession httpSession)
+    public CommonInfo login(String phonenumber, String password)
     {
         CommonInfo ret = commonServ.checkLoginInfo(phonenumber, password);
         if (ret != null) return ret;

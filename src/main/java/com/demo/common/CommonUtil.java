@@ -9,6 +9,4 @@ public class CommonUtil
     //存放在 session 中的验证码的 key
     public static final String identifyingcode = "identifyingcode";
 
-    //会话的ID，相当于cookie
-    public static final String sessionid = "sessionid";
 }

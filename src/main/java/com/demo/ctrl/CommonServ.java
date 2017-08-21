@@ -7,7 +7,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -24,7 +23,6 @@ public class CommonServ
 
     private final Pattern phonePattern;
     private final Pattern passwordPattern;
-    private final Pattern securityCodePattern;
     private final Pattern specialCharPattern;
 
     @Autowired
@@ -35,7 +33,6 @@ public class CommonServ
 
         phonePattern = Pattern.compile("^1[3|4|5|8][0-9]\\d{8}$");
         passwordPattern = Pattern.compile("^[A-Za-z1-9]+$");
-        securityCodePattern = Pattern.compile("\\d{6}$");
         specialCharPattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;,\\[\\].<>/?！￥…（）—【】‘；：”“’。，、？]");
     }
 
@@ -67,7 +64,7 @@ public class CommonServ
      * @return 全部合法：null，否则返回相应的错误信息
      */
 
-    CommonInfo checkRegisteInfo(String phoneNumber, String password, String passRepeat, String securityCode, String nickName, HttpSession httpSession)
+    CommonInfo checkRegisteInfo(String phoneNumber, String password, String passRepeat, String nickName)
     {
         //验证：手机号的合法性
         if (phoneNumber == null) return new CommonInfo(10010);
@@ -86,12 +83,6 @@ public class CommonServ
 
         //验证：密码一致
         if (!password.equals(passRepeat)) return new CommonInfo(10013);
-
-
-//        //验证：验证码的正确性（6位数字）
-//        if (!securityCodePattern.matcher(securityCode).matches()) return new CommonInfo(10014);
-//        String securityCodeInSession = (String) httpSession.getAttribute("securityCode");
-//        if (!securityCode.equals(securityCodeInSession)) return new CommonInfo(10014);
 
         //验证：（昵称：2-6个字符,禁止特殊字符）
         boolean specialChar = false;

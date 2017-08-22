@@ -35,13 +35,10 @@ public class CommonCtrl
      */
     @RequestMapping("/registe")
     public CommonInfo registe(String phonenumber, String password, String passrepeat,
-                              String nickname, HttpSession httpSession)
-    {
+                              String nickname)
+            {
         CommonInfo ret = commonServ.checkRegisteInfo(phonenumber, password, passrepeat, nickname);
         if (ret != null) return ret;
-
-        //移除 session 中的验证码
-        httpSession.removeAttribute(CommonUtil.identifyingcode);
 
         return commonServ.registe(phonenumber, nickname, password);
     }

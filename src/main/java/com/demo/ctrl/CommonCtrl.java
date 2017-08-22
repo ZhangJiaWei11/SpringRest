@@ -28,10 +28,10 @@ public class CommonCtrl
     /**
      * 用户注册
      *
-     * @param phonenumber  手机号
-     * @param password     密码
-     * @param passrepeat   密码重复
-     * @param nickname     昵称
+     * @param phonenumber 手机号
+     * @param password    密码
+     * @param passrepeat  密码重复
+     * @param nickname    昵称
      */
     @RequestMapping("/registe")
     public CommonInfo registe(String phonenumber, String password, String passrepeat,
@@ -73,6 +73,8 @@ public class CommonCtrl
         if (sessionID == null) return new CommonInfo(10001);
 
         String phonenumber = commonServ.findPhoneNumberBySessionid(sessionID);
+        if (phonenumber == null) return new CommonInfo(10001);
+
         return commonServ.changeNickname(newNickname, phonenumber);
     }
 }

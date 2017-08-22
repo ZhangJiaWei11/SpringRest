@@ -192,7 +192,14 @@ public class CommonServ
      */
     private String getSessionID(String phonenumber)
     {
-        return phonenumber + "-" + DateTime.now().getMillis() + "-" + Math.random();
+        String ret;
+        while (true)
+        {
+            ret = phonenumber + "-" + DateTime.now().getMillis() + "-" + Math.random();
+            String ls = sessionIdDao.findPhoneNumberBySessionid(ret);
+            if (ls == null) break;
+        }
+        return ret;
     }
 
     /**
